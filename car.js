@@ -11,12 +11,15 @@ class Car{
         this.friction = 0.05;
         this.angle = 0;
 
+
+        this.sensor = new Sensor(this);
         this.controls = new Controls();
     }
 
     // x and y = 0,0 at the top left of the canvas
-    update(){
+    update(roadBorders){
         this.#move();
+        this.sensor.update(roadBorders);
     }
     #move(){
         if(this.controls.forward){
@@ -72,5 +75,7 @@ class Car{
         );
         ctx.fill();
         ctx.restore();
+
+        this.sensor.draw(ctx);
     }
 }
