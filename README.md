@@ -1,6 +1,6 @@
-# 🚗 Self-Driving Car Simulation
+# 🚗 Self-Driving Car Simulation with Reinforcement Learning & Genetic Algorithms
 
-> An interactive, fully-featured self-driving car simulation built with vanilla JavaScript, featuring AI cars that learn to navigate through traffic using neural networks and genetic algorithms.
+> An interactive, fully-featured self-driving car simulation built with vanilla JavaScript, featuring AI cars that learn to navigate through traffic using neural networks, genetic algorithms, and reinforcement learning.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
@@ -27,6 +27,7 @@ This project demonstrates the power of **neuro-evolutionary algorithms** through
 ### Key Concepts
 - **Neural Networks**: Feed-forward networks control each car's behavior
 - **Genetic Algorithm**: "Survival of the fittest" drives evolution across generations
+- **Reinforcement Learning**: *(Coming soon!)* Q-learning and reward-based training will be integrated
 - **Ray-Casting Sensors**: Cars perceive their environment through simulated laser sensors
 - **Real-Time Learning**: Visualize evolution happening in real-time
 
