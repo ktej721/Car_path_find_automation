@@ -14,7 +14,13 @@ animate();
 function animate(){
     car.update();
     canvas.height = window.innerHeight; // clears the canvas
+    
+    ctx.save();
+    ctx.translate(0, -car.y+canvas.height*0.7);
+
     road.draw(ctx);
     car.draw(ctx);
+    
+    ctx.restore();
     requestAnimationFrame(animate);  
 }
