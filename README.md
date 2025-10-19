@@ -464,8 +464,8 @@ MIT License - You are free to:
 
 If you found this project helpful or interesting, please consider:
 
-[![Star on GitHub](https://img.shields.io/github/stars/YOUR_USERNAME/Car_path_find_automation?style=social)](https://github.com/YOUR_USERNAME/Car_path_find_automation)
-[![Fork on GitHub](https://img.shields.io/github/forks/YOUR_USERNAME/Car_path_find_automation?style=social)](https://github.com/YOUR_USERNAME/Car_path_find_automation/fork)
+[![Star on GitHub](https://img.shields.io/github/stars/YOUR_USERNAME/Car_path_find_automation?style=social)](https://github.com/kartik912/Car_path_find_automation)
+[![Fork on GitHub](https://img.shields.io/github/forks/YOUR_USERNAME/Car_path_find_automation?style=social)](https://github.com/kartik912/Car_path_find_automation//fork)
 
 **⭐ Star this repository** • **🍴 Fork and experiment** • **🤝 Contribute improvements** • **📢 Share with others**
 
