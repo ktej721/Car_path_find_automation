@@ -12,9 +12,13 @@ const carCtx = carCanvas.getContext("2d");
 
 const road = new Road(carCanvas.width/2, carCanvas.width*0.9);
 
-const N = 100;
+const N = 1;
 const cars = generateCars(N);
 let bestCar = cars[0];
+let generation = localStorage.getItem("generation") ? parseInt(localStorage.getItem("generation")) : 1;
+document.getElementById("generationCount").innerText = generation;
+let startTime = new Date();
+const timeThreshold = 10000;
 
 if (localStorage.getItem("bestBrain")) {
     for (let i = 0; i < cars.length; i++) {
@@ -46,6 +50,7 @@ function save(){
 
 function discard(){
     localStorage.removeItem("bestBrain");
+    localStorage.removeItem("generation");
 }
 
 function generateCars(N){   
@@ -68,6 +73,21 @@ function animate(){
         c=>c.y==Math.min(...cars.map(c=>c.y))
     );
 
+    const bestCarFitness = -bestCar.y;
+    if (new Date() - startTime > timeThreshold) {
+        const storedFitness = localStorage.getItem("bestFitness") ? parseFloat(localStorage.getItem("bestFitness")) : -Infinity;
+        if (bestCarFitness > storedFitness) {
+            localStorage.setItem("bestFitness", bestCarFitness);
+            localStorage.setItem("bestBrain", JSON.stringify(bestCar.brain));
+            generation=1;
+            localStorage.setItem("generation", generation);
+        }
+        else{
+            generation++;
+            localStorage.setItem("generation", generation);
+        }
+        location.reload();
+    }
 
 
     carCanvas.height = window.innerHeight;
@@ -78,7 +98,7 @@ function animate(){
     carCtx.translate(0, -bestCar.y+carCanvas.height*0.7);
 
     road.draw(carCtx);
-    for(let i=0; i<traffic.length; i++){
+for(let i=0; i<traffic.length; i++){
         traffic[i].draw(carCtx, "red");
     }
     carCtx.globalAlpha = 0.2;
