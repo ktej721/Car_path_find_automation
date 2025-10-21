@@ -13,7 +13,7 @@ const carCtx = carCanvas.getContext("2d");
 const road = new Road(carCanvas.width/2, carCanvas.width*0.9);
 
 const N = 1;
-const cars = generateCars(N);
+let cars = generateCars(N);
 let bestCar = cars[0];
 let generation = localStorage.getItem("generation") ? parseInt(localStorage.getItem("generation")) : 1;
 document.getElementById("generationCount").innerText = generation;
@@ -21,15 +21,15 @@ let startTime = new Date();
 const timeThreshold = 10000;
 
 if (localStorage.getItem("bestBrain")) {
+    const bestBrain = JSON.parse(localStorage.getItem("bestBrain"));
     for (let i = 0; i < cars.length; i++) {
-        cars[i].brain = JSON.parse(
-            localStorage.getItem("bestBrain"));
+        cars[i].brain = JSON.parse(JSON.stringify(bestBrain));
         if (i != 0) {
             NeuralNetwork.mutate(cars[i].brain, 0.2);
         }
     }
 }
-const traffic = [
+let traffic = [
     new Car(road.getLaneCenter(1),-100,30,50,"DUMMY",2),
     new Car(road.getLaneCenter(0),-300,30,50,"DUMMY",2),
     new Car(road.getLaneCenter(2),-300,30,50,"DUMMY",2),
@@ -61,6 +61,32 @@ function generateCars(N){
     return cars;
 }
 
+function startNewGeneration() {
+    traffic = [
+        new Car(road.getLaneCenter(1),-100,30,50,"DUMMY",2),
+        new Car(road.getLaneCenter(0),-300,30,50,"DUMMY",2),
+        new Car(road.getLaneCenter(2),-300,30,50,"DUMMY",2),
+        new Car(road.getLaneCenter(0),-500,30,50,"DUMMY",2),
+        new Car(road.getLaneCenter(1),-500,30,50,"DUMMY",2),
+        new Car(road.getLaneCenter(1),-700,30,50,"DUMMY",2),
+        new Car(road.getLaneCenter(2),-700,30,50,"DUMMY",2)
+    ];
+
+    cars = generateCars(N);
+    bestCar = cars[0];
+    if (localStorage.getItem("bestBrain")) {
+        const bestBrain = JSON.parse(localStorage.getItem("bestBrain"));
+        for (let i = 0; i < cars.length; i++) {
+            cars[i].brain = JSON.parse(JSON.stringify(bestBrain));
+            if (i != 0) {
+                NeuralNetwork.mutate(cars[i].brain, 0.2);
+            }
+        }
+    }
+    startTime = new Date();
+    document.getElementById("generationCount").innerText = generation;
+}
+
 function animate(){
     for(let i=0; i<traffic.length; i++){
         traffic[i].update(road.borders, []);
@@ -86,7 +112,7 @@ function animate(){
             generation++;
             localStorage.setItem("generation", generation);
         }
-        location.reload();
+        startNewGeneration();
     }
 
 
